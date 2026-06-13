@@ -48,38 +48,25 @@ It is about building a space that communicates, at first glance, ideas like:
 
 ---
 
-## 🎥 Gameplay Preview
+## 🎥 Showcase
 
-> **Placeholder ready for your real GIF.** Replace `assets/preview-shader.gif` with the path to the file you want to upload to the repository.
-
-<div align="center">
-  <img src="assets/preview-shader.gif" alt="Main shader preview — replace with a real GIF" width="900" />
-</div>
-
-<p align="center">
-  <sub>🔁 Replace this placeholder with a GIF exported directly from Unity so the README showcases your real work.</sub>
-</p>
-
----
-
-## 🖼️ Visual showcase
+> **Short/Long tunnel** 
 
 <div align="center">
-  <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80" width="49%" alt="Neon visual inspiration" />
-  <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80" width="49%" alt="Digital sci-fi inspiration" />
+  <img src="GIFs/NonEuclidean_8.gif" alt="Long/Short Tunnel" width="480" />
 </div>
 
+> **The never ending squared room** 
+
 <p align="center">
-  <sub>An aesthetic reference for the lab’s visual direction: glow, emission, glitches, energy, and stylized surfaces.</sub>
+  <sub>(Work in Progress)</sub>
 </p>
 
----
+> **Turn around the column** 
 
-## 🚀 What kind of non-Euclidean spaces you can expect here
-
-- **Short/Long tunnel** with strong visual presence.
-- **The never ending squared room** with a futuristic aesthetic.
-- **Turn around the column** with a futuristic aesthetic.
+<div align="center">
+  <img src="GIFs/NonEuclidean_9.gif" alt="Long/Short Tunnel" width="480" />
+</div>
 
 ---
 
@@ -88,7 +75,7 @@ It is about building a space that communicates, at first glance, ideas like:
 According to the current project structure, the repository contains:
 
 ```text
-_ShaderLab/
+_Ineuclidean/
 ├── Assets/
 ├── Packages/
 └── README.md
