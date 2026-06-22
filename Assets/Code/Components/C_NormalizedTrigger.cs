@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
-public class CNormalizedTrigger : MonoBehaviour
+public class C_NormalizedTrigger : MonoBehaviour
 {
     #region ATTRIBUTES
 

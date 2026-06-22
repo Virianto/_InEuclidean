@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MNonEuclideanColumn : MonoBehaviour
+public class M_NonEuclideanColumn : MonoBehaviour
 {
     #region ATTRIBTUES
 
@@ -12,7 +12,7 @@ public class MNonEuclideanColumn : MonoBehaviour
 
     [Space(10)]
 
-    [SerializeField] CNormalizedTrigger columnNormalizedTrigger;
+    [SerializeField] C_NormalizedTrigger columnNormalizedTrigger;
 
     [SerializeField] RectTransform cameraMaskRect;
 
@@ -64,7 +64,7 @@ public class MNonEuclideanColumn : MonoBehaviour
         {
             int index = a;
 
-            CSimpleTrigger[] allSimpleTriggersInMaskGroup = allMaskGroupsToUse[index].GetComponentsInChildren<CSimpleTrigger>();
+            C_SimpleTrigger[] allSimpleTriggersInMaskGroup = allMaskGroupsToUse[index].GetComponentsInChildren<C_SimpleTrigger>();
 
             for(int x = 0; x < allSimpleTriggersInMaskGroup.Length; ++x)
             {
@@ -89,7 +89,7 @@ public class MNonEuclideanColumn : MonoBehaviour
         {
             int index = a;
 
-            CSimpleTrigger[] allSimpleTriggersInMaskGroup = allMaskGroupsToUse[index].GetComponentsInChildren<CSimpleTrigger>();
+            C_SimpleTrigger[] allSimpleTriggersInMaskGroup = allMaskGroupsToUse[index].GetComponentsInChildren<C_SimpleTrigger>();
 
             for (int x = 0; x < allSimpleTriggersInMaskGroup.Length; ++x)
             {

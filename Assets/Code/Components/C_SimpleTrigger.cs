@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(BoxCollider))]
-public class CSimpleTrigger : MonoBehaviour
+public class C_SimpleTrigger : MonoBehaviour
 {
     #region ATTRIBUTES
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MSimplePortal : MonoBehaviour
+public class M_SimplePortal : MonoBehaviour
 {
     #region ATTRIBUTES
 
@@ -12,8 +12,8 @@ public class MSimplePortal : MonoBehaviour
 
     struct PairedNormalizedTriggers
     {
-        public CNormalizedTrigger alphaTrigger;
-        public CNormalizedTrigger omegaTrigger;
+        public C_NormalizedTrigger alphaTrigger;
+        public C_NormalizedTrigger omegaTrigger;
     }
 
     Transform mainCameraTransform;
@@ -51,7 +51,7 @@ public class MSimplePortal : MonoBehaviour
 
     void Start()
     {
-        CNormalizedTrigger[] allTriggers = GetComponentsInChildren<CNormalizedTrigger>();
+        C_NormalizedTrigger[] allTriggers = GetComponentsInChildren<C_NormalizedTrigger>();
 
         for (byte a = 0; a < allTriggers.Length; ++a)
         {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BMazePortals : MonoBehaviour
+public class B_MazePortals : MonoBehaviour
 {
     #region ATTRIBUTES
         
@@ -93,7 +93,7 @@ public class BMazePortals : MonoBehaviour
 
             SinglePortalPoints x = allPortals[a];
 
-            CNormalizedTrigger nTrigger = allPortals[a].portalFrame.GetComponentInChildren<CNormalizedTrigger>();
+            C_NormalizedTrigger nTrigger = allPortals[a].portalFrame.GetComponentInChildren<C_NormalizedTrigger>();
 
             nTrigger.OnColliderDetectedFromForward += (Transform t) =>
             {

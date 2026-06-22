@@ -17,7 +17,7 @@ public enum NonEuclideanSpaces : byte
     Eighth
 }
 
-public class MLinkedPortals : MonoBehaviour
+public class M_LinkedPortals : MonoBehaviour
 {
     #region ATTRIBUTES
 
@@ -112,7 +112,7 @@ public class MLinkedPortals : MonoBehaviour
 
             SinglePortalPoints x = allPortals[a];
 
-            CNormalizedTrigger nTrigger = allPortals[a].portalFrame.GetComponentInChildren<CNormalizedTrigger>();
+            C_NormalizedTrigger nTrigger = allPortals[a].portalFrame.GetComponentInChildren<C_NormalizedTrigger>();
 
             nTrigger.OnColliderDetectedFromForward += (Transform t) =>
             {

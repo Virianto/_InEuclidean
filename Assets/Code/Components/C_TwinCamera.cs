@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class CTwinCamera : MonoBehaviour
+public class C_TwinCamera : MonoBehaviour
 {
     #region ATTRIBUTES
 
