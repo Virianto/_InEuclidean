@@ -1,12 +1,19 @@
-Shader "Venat/Unlit/ScreenCutoutShader"
+Shader "_ViriantoTem/HLSL/ScreenCutoutShader"
 {
 	Properties
 	{
 		_MainTex ("Texture", 2D) = "white" {}
 	}
+	
 	SubShader
 	{
-		Tags{ "Queue" = "Transparent" "IgnoreProjector" = "True" "RenderType" = "Transparent" }
+		Tags
+		{
+			"Queue" = "Transparent"
+			"IgnoreProjector" = "True"
+			"RenderType" = "Transparent"
+		}
+		
 		Lighting Off
 		Cull Back
 		ZWrite On
@@ -14,29 +21,29 @@ Shader "Venat/Unlit/ScreenCutoutShader"
 		
 		Pass
 		{
-			CGPROGRAM
+			HLSLPROGRAM
 
 			#pragma vertex vert
 			#pragma fragment frag
 			
-			#include "UnityCG.cginc"
+			#include "HLSLSupport.cginc"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
 			struct appdata
 			{
-				float4 vertex : POSITION;				
+				half4 vertex : POSITION;				
 			};
 
 			struct v2f
-			{				
-				float4 screenPos : TEXCOORD0;
-				float4 vertex : SV_POSITION;
-				
+			{		
+				half4 vertex : SV_POSITION;
+				fixed4 screenPos : TEXCOORD0;				
 			};
 
 			v2f vert (appdata v)
 			{
 				v2f o;
-				o.vertex = UnityObjectToClipPos(v.vertex);
+				o.vertex = TransformObjectToHClip(v.vertex);
 				o.screenPos = ComputeScreenPos(o.vertex);
 				return o;
 			}
@@ -50,7 +57,8 @@ Shader "Venat/Unlit/ScreenCutoutShader"
 				
 				return col;
 			}
-			ENDCG
+			
+			ENDHLSL
 		}
 	}
 }
