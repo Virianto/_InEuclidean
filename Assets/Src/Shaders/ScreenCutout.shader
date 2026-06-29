@@ -1,4 +1,4 @@
-Shader "_ViriantoTem/HLSL/ScreenCutoutShader"
+Shader "_ViriantoTem/HLSL/ScreenCutout"
 {
 	Properties
 	{
