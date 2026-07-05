@@ -57,8 +57,8 @@ public class M_NonEuclideanColumn : MonoBehaviour
 
     void Start()
     {
-        //columnNormalizedTrigger.OnRearTriggerExit += ToggleMasksReferences(false);
-        //columnNormalizedTrigger.OnFrontalTriggerExit += ToggleMasksReferences(true);
+        columnNormalizedTrigger.OnFrontalTriggerExit += OnFrontalExit;
+        columnNormalizedTrigger.OnRearTriggerExit += OnRearExit;
 
         for(int a = 0; a < allMaskGroupsToUse.Count; ++a)
         {
@@ -80,20 +80,31 @@ public class M_NonEuclideanColumn : MonoBehaviour
         cameraMaskMat.SetInt(stencilReference, currentMaskRef);
     }
 
-    void SetUpListeners()
+    
+    /// <summary>
+    /// This method acts as an intermediary to discard an unnecessary parameter while,
+    /// at the same time, allow to un/subscribe without null references
+    /// </summary>
+    /// <param name="t">Unused parameter</param>
+    void OnRearExit(Transform t)
     {
-        
+        ToggleMasksReferences(false);
     }
 
-    void RemoveListeners()
+    /// <summary>
+    /// This method acts as an intermediary to discard an unnecessary parameter while,
+    /// at the same time, allow to un/subscribe without null references
+    /// </summary>
+    /// <param name="t">Unused parameter</param>
+    void OnFrontalExit(Transform t)
     {
-        
+        ToggleMasksReferences(true);
     }
 
     void OnDisable()
     {
-        //columnNormalizedTrigger.OnRearTriggerExit -= ToggleMasksReferences(false);
-        //columnNormalizedTrigger.OnFrontalTriggerExit -= ToggleMasksReferences(true);
+        columnNormalizedTrigger.OnFrontalTriggerExit -= OnFrontalExit;
+        columnNormalizedTrigger.OnRearTriggerExit -= OnRearExit;
         
         for (int a = 0; a < allMaskGroupsToUse.Count; ++a)
         {
@@ -113,6 +124,10 @@ public class M_NonEuclideanColumn : MonoBehaviour
         }
     }    
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="goForward"></param>
     void ToggleMasksReferences(bool goForward)
     {
         int maskGroupRefToPreserveIndex = goForward ? 1 : 0;
