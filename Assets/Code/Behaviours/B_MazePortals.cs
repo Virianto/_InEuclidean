@@ -95,12 +95,12 @@ public class B_MazePortals : MonoBehaviour
 
             C_NormalizedTrigger nTrigger = allPortals[a].portalFrame.GetComponentInChildren<C_NormalizedTrigger>();
 
-            nTrigger.OnColliderDetectedFromForward += (Transform t) =>
+            nTrigger.OnFrontalTriggerEnter += (Transform t) =>
             {
                 playerIsCrossing = !playerIsCrossing;
             };
 
-            nTrigger.OnColliderDetectedFromBack += (Transform transformDetected) =>
+            nTrigger.OnRearTriggerEnter += (Transform transformDetected) =>
             {
                 if (!playerIsCrossing)
                 {

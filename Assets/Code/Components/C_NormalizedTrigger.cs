@@ -1,25 +1,34 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// 
+/// </summary>
 [RequireComponent(typeof(BoxCollider))]
 public class C_NormalizedTrigger : MonoBehaviour
 {
     #region ATTRIBUTES
 
-    public delegate void ColliderDetectedFromForward(Transform crossingObject);
-    public ColliderDetectedFromForward OnColliderDetectedFromForward;
+    public delegate void FrontalTriggerEnter(Transform crossingObject);
+    public FrontalTriggerEnter OnFrontalTriggerEnter;
 
-    public delegate void ColliderDetectedFromBack(Transform crossingObject);
-    public ColliderDetectedFromBack OnColliderDetectedFromBack;
+    public delegate void RearTriggerEnter(Transform crossingObject);
+    public RearTriggerEnter OnRearTriggerEnter;
 
-    public delegate void ColliderLeftForward(Transform crossingObject);
-    public ColliderLeftForward OnColliderLeftForward;
+    public delegate void FrontalTriggerExit(Transform crossingObject);
+    public FrontalTriggerExit OnFrontalTriggerExit;
 
-    public delegate void ColliderLeftBack(Transform crossingObject);
-    public ColliderLeftBack OnColliderLeftBack;
+    public delegate void RearTriggerExit(Transform crossingObject);
+    public RearTriggerExit OnRearTriggerExit;
+    
+    public delegate void RearToFrontTriggerExit(Transform crossingObject);
+    public RearToFrontTriggerExit OnRearToFrontTriggerExit;
+    
+    public delegate void FrontToRearTriggerExit(Transform crossingObject);
+    public FrontToRearTriggerExit OnFrontToRearTriggerExit;
 
-    BoxCollider myCollider;
+    BoxCollider _myCollider;
 
-    Vector3 triggerCenterPos;
+    Vector3 _triggerCenterPos;
 
     #endregion
 
@@ -27,13 +36,13 @@ public class C_NormalizedTrigger : MonoBehaviour
 
     void OnEnable()
     {
-        myCollider = GetComponent<BoxCollider>();
-        myCollider.isTrigger = true;
+        _myCollider = GetComponent<BoxCollider>();
+        _myCollider.isTrigger = true;
     }
 
     void CheckRelativeToTriggerDirection(Transform otherObjectTrasform, bool objectIsEntering)
     {
-        Vector3 posDif = otherObjectTrasform.position - triggerCenterPos;
+        Vector3 posDif = otherObjectTrasform.position - _triggerCenterPos;
         Vector3 relativePos = transform.TransformPoint(otherObjectTrasform.position);
 
         float accurate = Vector3.Dot(transform.forward, posDif);
@@ -42,11 +51,11 @@ public class C_NormalizedTrigger : MonoBehaviour
         {
             if (accurate < 0)
             {
-                OnColliderDetectedFromBack?.Invoke(otherObjectTrasform);
+                OnRearTriggerEnter?.Invoke(otherObjectTrasform);
             }
             else if (accurate > 0)
             {             
-                OnColliderDetectedFromForward?.Invoke(otherObjectTrasform);
+                OnFrontalTriggerEnter?.Invoke(otherObjectTrasform);
             }
         }
         else
@@ -54,25 +63,25 @@ public class C_NormalizedTrigger : MonoBehaviour
             if (accurate < 0)
             {
                 Debug.Log("BACK");
-                OnColliderLeftBack?.Invoke(otherObjectTrasform);
+                OnRearTriggerExit?.Invoke(otherObjectTrasform);
             }
             else if (accurate > 0)
             {
                 Debug.Log("FORWARD");
-                OnColliderLeftForward?.Invoke(otherObjectTrasform);
+                OnFrontalTriggerExit?.Invoke(otherObjectTrasform);
             }
         }        
     }
 
     void OnTriggerEnter(Collider other)
     {
-        triggerCenterPos = transform.TransformPoint(myCollider.center);
+        _triggerCenterPos = transform.TransformPoint(_myCollider.center);
         CheckRelativeToTriggerDirection(other.transform, true);
     }
 
     void OnTriggerExit(Collider other)
     {
-        triggerCenterPos = transform.TransformPoint(myCollider.center);
+        _triggerCenterPos = transform.TransformPoint(_myCollider.center);
         CheckRelativeToTriggerDirection(other.transform, false);
     }
 

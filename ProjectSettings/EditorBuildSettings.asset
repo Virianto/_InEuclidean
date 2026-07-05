@@ -6,7 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/_Scenes/InEuclidean_Column.unity
+    guid: a7c8062b94b62134581f61c66e40a071
+  - enabled: 1
+    path: Assets/_Scenes/InEuclidean_Tunnel.unity
+    guid: 48f2c10bd84564c49af4f0d36dc8bbeb
+  - enabled: 1
+    path: Assets/_Scenes/InEuclidean_Maze.unity
+    guid: 62a76891f4b1b3642916303f666bc926
+  - enabled: 1
+    path: Assets/_Scenes/InEuclidean_Dynamic.unity
+    guid: cbda54c4435d31048ac7db0a55e02379
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

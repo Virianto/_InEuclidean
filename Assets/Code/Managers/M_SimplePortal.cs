@@ -55,12 +55,12 @@ public class M_SimplePortal : MonoBehaviour
 
         for (byte a = 0; a < allTriggers.Length; ++a)
         {
-            allTriggers[a].OnColliderDetectedFromForward += (Transform t) => 
+            allTriggers[a].OnFrontalTriggerEnter += (Transform t) => 
             {                
                 playerIsCrossing = !playerIsCrossing;
             };
 
-            allTriggers[a].OnColliderDetectedFromBack += (Transform t) =>
+            allTriggers[a].OnRearTriggerEnter += (Transform t) =>
             {                                                
                 if (!playerIsCrossing)
                 {

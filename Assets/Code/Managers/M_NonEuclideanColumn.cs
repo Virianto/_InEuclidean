@@ -57,8 +57,8 @@ public class M_NonEuclideanColumn : MonoBehaviour
 
     void Start()
     {
-        columnNormalizedTrigger.OnColliderLeftBack += (Transform playerTransform) => { ToggleMasksReferences(false); };
-        columnNormalizedTrigger.OnColliderLeftForward += (Transform playerTransform) => { ToggleMasksReferences(true); };
+        columnNormalizedTrigger.OnRearTriggerExit += (Transform playerTransform) => { ToggleMasksReferences(false); };
+        columnNormalizedTrigger.OnFrontalTriggerExit += (Transform playerTransform) => { ToggleMasksReferences(true); };
 
         for(int a = 0; a < allMaskGroupsToUse.Count; ++a)
         {
@@ -82,9 +82,9 @@ public class M_NonEuclideanColumn : MonoBehaviour
 
     void OnDisable()
     {
-        columnNormalizedTrigger.OnColliderLeftBack -= (Transform playerTransform) => { ToggleMasksReferences(false); };
-        columnNormalizedTrigger.OnColliderLeftForward -= (Transform playerTransform) => { ToggleMasksReferences(true); };
-
+        columnNormalizedTrigger.OnRearTriggerExit -= (Transform playerTransform) => { ToggleMasksReferences(false); };
+        columnNormalizedTrigger.OnFrontalTriggerExit -= (Transform playerTransform) => { ToggleMasksReferences(true); };
+        
         for (int a = 0; a < allMaskGroupsToUse.Count; ++a)
         {
             int index = a;
