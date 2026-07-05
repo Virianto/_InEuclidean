@@ -68,7 +68,7 @@ public class M_NonEuclideanColumn : MonoBehaviour
 
             for(int x = 0; x < allSimpleTriggersInMaskGroup.Length; ++x)
             {
-                allSimpleTriggersInMaskGroup[x].OnSimpleTriggerEntered += () =>
+                allSimpleTriggersInMaskGroup[x].OnSimpleTriggerEnter += () =>
                 {
                     //Debug.Log("Entered a simple trigger");
                     currentMaskRef = allMaskGroupsToUse[index].GetComponentInChildren<Renderer>().material.GetInt(stencilReference);
@@ -114,7 +114,7 @@ public class M_NonEuclideanColumn : MonoBehaviour
 
             for (int x = 0; x < allSimpleTriggersInMaskGroup.Length; ++x)
             {
-                allSimpleTriggersInMaskGroup[x].OnSimpleTriggerEntered -= () =>
+                allSimpleTriggersInMaskGroup[x].OnSimpleTriggerEnter -= () =>
                 {
                     //Debug.Log("Entered a simple trigger");
                     currentMaskRef = allMaskGroupsToUse[index].GetComponentInChildren<Renderer>().material.GetInt(stencilReference);

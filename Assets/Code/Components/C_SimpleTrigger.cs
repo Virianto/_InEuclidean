@@ -10,16 +10,15 @@ public class C_SimpleTrigger : MonoBehaviour
 {
     #region ATTRIBUTES
 
-    public UnityEvent TriggerEnteredEvent;
+    public UnityEvent TriggerEnterEvent;
     public UnityEvent TriggerStayEvent;
-    public UnityEvent TriggerLeftEvent;
-
+    public UnityEvent TriggerExitEvent;
     
-    public event Action OnSimpleTriggerEntered;
+    public event Action OnSimpleTriggerEnter;
 
     public event Action OnSimpleTriggerStay;
 
-    public event Action OnSimpleTriggerLeft;
+    public event Action OnSimpleTriggerExit;
         
     #endregion
 
@@ -37,8 +36,8 @@ public class C_SimpleTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        OnSimpleTriggerEntered?.Invoke();
-        TriggerEnteredEvent?.Invoke();
+        OnSimpleTriggerEnter?.Invoke();
+        TriggerEnterEvent?.Invoke();
     }
 
     void OnTriggerStay(Collider other)
@@ -49,8 +48,8 @@ public class C_SimpleTrigger : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        OnSimpleTriggerLeft?.Invoke();
-        TriggerLeftEvent?.Invoke();
+        OnSimpleTriggerExit?.Invoke();
+        TriggerExitEvent?.Invoke();
     }
 
     #endregion
