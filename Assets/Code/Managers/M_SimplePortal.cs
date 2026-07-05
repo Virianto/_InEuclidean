@@ -51,6 +51,11 @@ public class M_SimplePortal : MonoBehaviour
 
     void Start()
     {
+        // Since this class and the triggers share the same lifetime in scene, there's no unsubscription managed
+        // for any event and all subscriptions are made in 'Start'. If you plan to make any complex use that
+        // involves Enabling and Disabling the whole system, consider managing this differently (OnEnable / OnDisable)
+
+        
         C_NormalizedTrigger[] allTriggers = GetComponentsInChildren<C_NormalizedTrigger>();
 
         for (byte a = 0; a < allTriggers.Length; ++a)

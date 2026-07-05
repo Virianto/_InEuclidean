@@ -106,6 +106,11 @@ public class M_LinkedPortals : MonoBehaviour
 
     void Awake()
     {
+        // Since this class and the triggers share the same lifetime in scene, there's no unsubscription managed
+        // for any event and all subscriptions are made in 'Awake'. If you plan to make any complex use that
+        // involves Enabling and Disabling the whole system, consider managing this differently (OnEnable / OnDisable)
+
+        
         for (int a = 0; a < allPortals.Count; ++a)
         {
             activationPoints_Portals.Add(allPortals[a].activationPoint, allPortals[a]);

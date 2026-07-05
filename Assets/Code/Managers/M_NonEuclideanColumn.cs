@@ -57,8 +57,12 @@ public class M_NonEuclideanColumn : MonoBehaviour
 
     void Start()
     {
-        columnNormalizedTrigger.OnFrontalTriggerExit += OnFrontalExit;
-        columnNormalizedTrigger.OnRearTriggerExit += OnRearExit;
+        // Since this class and the triggers share the same lifetime in scene, there's no unsubscription managed
+        // for any event and all subscriptions are made in 'Start'. If you plan to make any complex use that
+        // involves Enabling and Disabling the whole system, consider managing this differently (OnEnable / OnDisable)
+        
+        columnNormalizedTrigger.OnFrontalTriggerExit += (Transform t) => { ToggleMasksReferences(true); };
+        columnNormalizedTrigger.OnRearTriggerExit += (Transform t) => { ToggleMasksReferences(false); };
 
         for(int a = 0; a < allMaskGroupsToUse.Count; ++a)
         {
@@ -77,52 +81,9 @@ public class M_NonEuclideanColumn : MonoBehaviour
             }
         }
 
+        // Ensure "_StencilRef" for the camera is EQUAL TO 0 from the beginning
         cameraMaskMat.SetInt(stencilReference, currentMaskRef);
     }
-
-    
-    /// <summary>
-    /// This method acts as an intermediary to discard an unnecessary parameter while,
-    /// at the same time, allow to un/subscribe without null references
-    /// </summary>
-    /// <param name="t">Unused parameter</param>
-    void OnRearExit(Transform t)
-    {
-        ToggleMasksReferences(false);
-    }
-
-    /// <summary>
-    /// This method acts as an intermediary to discard an unnecessary parameter while,
-    /// at the same time, allow to un/subscribe without null references
-    /// </summary>
-    /// <param name="t">Unused parameter</param>
-    void OnFrontalExit(Transform t)
-    {
-        ToggleMasksReferences(true);
-    }
-
-    void OnDisable()
-    {
-        columnNormalizedTrigger.OnFrontalTriggerExit -= OnFrontalExit;
-        columnNormalizedTrigger.OnRearTriggerExit -= OnRearExit;
-        
-        for (int a = 0; a < allMaskGroupsToUse.Count; ++a)
-        {
-            int index = a;
-
-            C_SimpleTrigger[] allSimpleTriggersInMaskGroup = allMaskGroupsToUse[index].GetComponentsInChildren<C_SimpleTrigger>();
-
-            for (int x = 0; x < allSimpleTriggersInMaskGroup.Length; ++x)
-            {
-                allSimpleTriggersInMaskGroup[x].OnSimpleTriggerEnter -= () =>
-                {
-                    //Debug.Log("Entered a simple trigger");
-                    currentMaskRef = allMaskGroupsToUse[index].GetComponentInChildren<Renderer>().material.GetInt(stencilReference);
-                    cameraMaskMat.SetInt(stencilReference, currentMaskRef);
-                };
-            }
-        }
-    }    
 
     /// <summary>
     /// 
