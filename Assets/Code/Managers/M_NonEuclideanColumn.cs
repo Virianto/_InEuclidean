@@ -57,8 +57,8 @@ public class M_NonEuclideanColumn : MonoBehaviour
 
     void Start()
     {
-        columnNormalizedTrigger.OnRearTriggerExit += (Transform playerTransform) => { ToggleMasksReferences(false); };
-        columnNormalizedTrigger.OnFrontalTriggerExit += (Transform playerTransform) => { ToggleMasksReferences(true); };
+        //columnNormalizedTrigger.OnRearTriggerExit += ToggleMasksReferences(false);
+        //columnNormalizedTrigger.OnFrontalTriggerExit += ToggleMasksReferences(true);
 
         for(int a = 0; a < allMaskGroupsToUse.Count; ++a)
         {
@@ -80,10 +80,20 @@ public class M_NonEuclideanColumn : MonoBehaviour
         cameraMaskMat.SetInt(stencilReference, currentMaskRef);
     }
 
+    void SetUpListeners()
+    {
+        
+    }
+
+    void RemoveListeners()
+    {
+        
+    }
+
     void OnDisable()
     {
-        columnNormalizedTrigger.OnRearTriggerExit -= (Transform playerTransform) => { ToggleMasksReferences(false); };
-        columnNormalizedTrigger.OnFrontalTriggerExit -= (Transform playerTransform) => { ToggleMasksReferences(true); };
+        //columnNormalizedTrigger.OnRearTriggerExit -= ToggleMasksReferences(false);
+        //columnNormalizedTrigger.OnFrontalTriggerExit -= ToggleMasksReferences(true);
         
         for (int a = 0; a < allMaskGroupsToUse.Count; ++a)
         {
