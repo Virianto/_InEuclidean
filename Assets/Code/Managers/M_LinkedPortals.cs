@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
 
-public enum NonEuclideanSpaces : byte
+public enum InEuclideanSpaces : byte
 {
     Zero,
     First,
@@ -27,12 +27,12 @@ public class M_LinkedPortals : MonoBehaviour
         /// <summary>
         /// Space where the PORTAL is placed (not destiny point)
         /// </summary>
-        public NonEuclideanSpaces originSpace;
+        public InEuclideanSpaces originSpace;
 
         /// <summary>
         /// Space where player will be teleported after touching the portal
         /// </summary>
-        public NonEuclideanSpaces destinySpace;
+        public InEuclideanSpaces destinySpace;
 
         /// <summary>
         /// Quad with collider in scene. Twin camera will render on it
@@ -73,9 +73,9 @@ public class M_LinkedPortals : MonoBehaviour
 
     Vector3 relativeMainCamPosition;
 
-    NonEuclideanSpaces _currentSpace;
+    InEuclideanSpaces _currentSpace;
 
-    public NonEuclideanSpaces CurrentSpace
+    public InEuclideanSpaces CurrentSpace
     {
         private get
         {
@@ -139,7 +139,7 @@ public class M_LinkedPortals : MonoBehaviour
 
     void Start()
     {
-        CurrentSpace = NonEuclideanSpaces.First;
+        CurrentSpace = InEuclideanSpaces.First;
     }
 
     void LateUpdate()

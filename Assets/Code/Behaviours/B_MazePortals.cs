@@ -12,12 +12,12 @@ public class B_MazePortals : MonoBehaviour
         /// <summary>
         /// Space where the PORTAL is placed (not destiny point)
         /// </summary>
-        public NonEuclideanSpaces originSpace;
+        public InEuclideanSpaces originSpace;
 
         /// <summary>
         /// Space where player will be teleported after touching the portal
         /// </summary>
-        public NonEuclideanSpaces destinySpace;
+        public InEuclideanSpaces destinySpace;
         
         /// <summary>
         /// Quad with collider in scene. Twin camera will render on it
@@ -56,9 +56,9 @@ public class B_MazePortals : MonoBehaviour
 
     Vector3 relativeMainCamPosition;
 
-    NonEuclideanSpaces _currentSpace;
+    InEuclideanSpaces _currentSpace;
 
-    public NonEuclideanSpaces CurrentSpace
+    public InEuclideanSpaces CurrentSpace
     {
         private get
         {
@@ -119,7 +119,7 @@ public class B_MazePortals : MonoBehaviour
 
     void Start()
     {
-        CurrentSpace = NonEuclideanSpaces.First;     
+        CurrentSpace = InEuclideanSpaces.First;     
     }
 
     void LateUpdate()
