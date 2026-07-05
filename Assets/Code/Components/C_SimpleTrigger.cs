@@ -1,6 +1,10 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// Allows developers to easily manage triggers' events from editor
+/// </summary>
 [RequireComponent(typeof(BoxCollider))]
 public class C_SimpleTrigger : MonoBehaviour
 {
@@ -10,14 +14,12 @@ public class C_SimpleTrigger : MonoBehaviour
     public UnityEvent TriggerStayEvent;
     public UnityEvent TriggerLeftEvent;
 
-    public delegate void SimpleTriggerEntered();
-    public SimpleTriggerEntered OnSimpleTriggerEntered;
+    
+    public event Action OnSimpleTriggerEntered;
 
-    public delegate void SimpleTriggerStay();
-    public SimpleTriggerStay OnSimpleTriggerStay;
+    public event Action OnSimpleTriggerStay;
 
-    public delegate void SimpleTriggerLeft();
-    public SimpleTriggerLeft OnSimpleTriggerLeft;
+    public event Action OnSimpleTriggerLeft;
         
     #endregion
 
