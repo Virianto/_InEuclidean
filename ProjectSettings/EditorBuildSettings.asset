@@ -18,4 +18,4 @@ EditorBuildSettings:
     path: Assets/_Scenes/InEuclidean_Dynamic.unity
     guid: cbda54c4435d31048ac7db0a55e02379
   m_configObjects:
-    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: d4bda1595baf2a744b08095a90863a2e, type: 3}
