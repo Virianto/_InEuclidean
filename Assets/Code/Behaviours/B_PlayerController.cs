@@ -23,6 +23,13 @@ public class B_PlayerController : MonoBehaviour
         _testingMapActions = M_GlobalInput.Instance.globalInputActions.TestingMap;
         
         _testingMapActions.MainInteraction.performed += MainInteraction;
+        _testingMapActions.Move.performed += Move;
+    }
+
+    void Move(InputAction.CallbackContext c)
+    {
+        Vector2 direction = c.ReadValue<Vector2>();
+        transform.Translate(new Vector3(direction.x, 0, direction.y));
     }
     
     /// <summary>
