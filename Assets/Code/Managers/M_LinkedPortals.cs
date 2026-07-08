@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -139,7 +138,7 @@ public class M_LinkedPortals : MonoBehaviour
         }
 
         mainCameraTransform = Camera.main.transform;
-        myPanTilt = cinemachineCamera.GetCinemachineComponent<CinemachinePanTilt>();
+        myPanTilt = cinemachineCamera.GetComponent<CinemachinePanTilt>();
         //myPOV = cinemachineCamera.GetCinemachineComponent<CinemachinePOV>();       
     }
 

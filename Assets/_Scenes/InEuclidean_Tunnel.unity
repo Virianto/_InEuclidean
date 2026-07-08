@@ -274,7 +274,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 327796118}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: OmegaExitRefPoint
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
@@ -308,7 +308,7 @@ GameObject:
   - component: {fileID: 467460884}
   - component: {fileID: 467460886}
   - component: {fileID: 467460885}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -403,7 +403,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 488561543}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point_B
   m_TagString: Untagged
   m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
@@ -776,6 +776,7 @@ GameObject:
   - component: {fileID: 968609044}
   - component: {fileID: 968609043}
   - component: {fileID: 968609045}
+  - component: {fileID: 968609046}
   m_Layer: 0
   m_Name: Player_CinemachineCamera
   m_TagString: Untagged
@@ -854,6 +855,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineHardLockToTarget
   Damping: 0
+--- !u!114 &968609046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968609042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62d54399b04b4fa48a73e121d4937dd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachinePanTilt
+  ReferenceFrame: 2
+  RecenterTarget: 1
+  PanAxis:
+    Value: 0
+    Center: 0
+    Range: {x: -180, y: 180}
+    Wrap: 1
+    Recentering:
+      Enabled: 0
+      Wait: 1
+      Time: 2
+    Restrictions: 0
+  TiltAxis:
+    Value: 0
+    Center: 0
+    Range: {x: -70, y: 70}
+    Wrap: 0
+    Recentering:
+      Enabled: 0
+      Wait: 1
+      Time: 2
+    Restrictions: 0
 --- !u!1 &1036449757
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,7 +898,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1036449758}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PORTAL_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -966,7 +1001,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::M_LinkedPortals
   twinCamera: {fileID: 1849109241}
-  mainVirtualCamera: {fileID: 0}
+  cinemachineCamera: {fileID: 968609043}
   allPortals:
   - originSpace: 1
     destinySpace: 2
@@ -997,7 +1032,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1304896072}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: OmegaEntryRefPoint
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
@@ -1064,7 +1099,7 @@ GameObject:
   - component: {fileID: 1388974204}
   - component: {fileID: 1388974206}
   - component: {fileID: 1388974205}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1128,7 +1163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1394568526}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PORTAL_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1165,7 +1200,7 @@ GameObject:
   - component: {fileID: 1425750919}
   - component: {fileID: 1425750918}
   - component: {fileID: 1425750917}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: VisualFrameAndTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1290,7 +1325,6 @@ GameObject:
   - component: {fileID: 1466882535}
   - component: {fileID: 1466882534}
   - component: {fileID: 1466882533}
-  - component: {fileID: 1466882538}
   - component: {fileID: 1466882539}
   m_Layer: 0
   m_Name: MainCamera
@@ -1374,7 +1408,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1430,27 +1464,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1670336493}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1466882538
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1466882532}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.05
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1466882539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1605,7 +1618,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1586239169}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point_A
   m_TagString: Untagged
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
@@ -1896,7 +1909,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1739740640}
   - component: {fileID: 1739740641}
-  m_Layer: 0
+  - component: {fileID: 1739740642}
+  m_Layer: 3
   m_Name: PlayerPoint
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
@@ -1931,6 +1945,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::B_PlayerController
   _speed: 4
+--- !u!135 &1739740642
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739740639}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.05
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1849109241
 GameObject:
   m_ObjectHideFlags: 0
@@ -1941,7 +1976,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1849109246}
   - component: {fileID: 1849109245}
-  - component: {fileID: 1849109244}
   - component: {fileID: 1849109243}
   - component: {fileID: 1849109242}
   m_Layer: 0
@@ -2008,14 +2042,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!81 &1849109244
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1849109241}
-  m_Enabled: 1
 --- !u!20 &1849109245
 Camera:
   m_ObjectHideFlags: 0
@@ -2055,7 +2081,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -2095,7 +2121,7 @@ GameObject:
   - component: {fileID: 1921133370}
   - component: {fileID: 1921133369}
   - component: {fileID: 1921133372}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: VisualFrameAndTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
