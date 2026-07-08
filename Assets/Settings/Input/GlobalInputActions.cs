@@ -103,7 +103,7 @@ public partial class @GlobalInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Move"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""3bbb4d42-fc65-4c8b-9484-a4731d11e81b"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",

@@ -9,10 +9,16 @@ public class B_PlayerController : MonoBehaviour
 {
     #region ATTRIBUTES
 
+    [Header("Editable values")]
+    
+    [SerializeField] float _speed = 4;
+    
     /// <summary>
     /// This shall help shortening the code
     /// </summary>
     GlobalInputActions.TestingMapActions _testingMapActions;
+    
+    Vector3 _moveDirection;
     
     #endregion
     
@@ -23,13 +29,16 @@ public class B_PlayerController : MonoBehaviour
         _testingMapActions = M_GlobalInput.Instance.globalInputActions.TestingMap;
         
         _testingMapActions.MainInteraction.performed += MainInteraction;
-        _testingMapActions.Move.performed += Move;
+        _testingMapActions.Move.performed += (c)=>
+        {
+            Vector2 newDirection = c.ReadValue<Vector2>();
+            _moveDirection = new Vector3(newDirection.x, 0, newDirection.y);
+        };
     }
-
-    void Move(InputAction.CallbackContext c)
+    
+    void Update()
     {
-        Vector2 direction = c.ReadValue<Vector2>();
-        transform.Translate(new Vector3(direction.x, 0, direction.y));
+        transform.Translate(_moveDirection * Time.deltaTime * _speed);
     }
     
     /// <summary>
