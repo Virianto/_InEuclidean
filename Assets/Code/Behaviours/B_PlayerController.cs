@@ -51,22 +51,5 @@ public class B_PlayerController : MonoBehaviour
         Debug.Log("Main Interaction");
     }
 
-    /*void Update()
-    {
-        Vector2 mousePosition = Mouse.current.position.ReadValue();
-
-        // This code will execute ONLY whenever player presses the 'E' key on Keyboard
-        if (Keyboard.current.eKey.wasPressedThisFrame)
-        {
-            Debug.Log("E key pressed");
-        }
-
-        // This code will execute ONLY whenever player holds the 'W' key on Keyboard
-        if (Keyboard.current.wKey.isPressed)
-        {
-            Debug.Log("W key is being pressed");           
-        }
-    }*/
-
     #endregion
 }
