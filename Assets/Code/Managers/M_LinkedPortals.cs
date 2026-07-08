@@ -54,7 +54,7 @@ public class M_LinkedPortals : MonoBehaviour
 
     [SerializeField] GameObject twinCamera;
 
-    [SerializeField] CinemachineVirtualCamera mainVirtualCamera;
+    [SerializeField] CinemachineCamera cinemachineCamera;
 
     [Header("PORTALS AND REFERENCES")]
 
@@ -96,7 +96,7 @@ public class M_LinkedPortals : MonoBehaviour
         }
     }
 
-    CinemachinePanTilt myPOV;
+    CinemachinePanTilt myPanTilt;
 
     bool playerIsCrossing = false;
 
@@ -139,7 +139,8 @@ public class M_LinkedPortals : MonoBehaviour
         }
 
         mainCameraTransform = Camera.main.transform;
-        myPOV = mainVirtualCamera.GetCinemachineComponent<CinemachinePanTilt>();
+        myPanTilt = cinemachineCamera.GetCinemachineComponent<CinemachinePanTilt>();
+        //myPOV = cinemachineCamera.GetCinemachineComponent<CinemachinePOV>();       
     }
 
     void Start()
@@ -212,8 +213,10 @@ public class M_LinkedPortals : MonoBehaviour
         Quaternion dstRotation = twinRef.rotation * Quaternion.Inverse(mainCameraTransform.rotation) * mainRef.rotation;
         Vector3 dstEuler = Quaternion.ToEulerAngles(dstRotation);
 
-        myPOV.PanAxis.Value = dstEuler.x;
-        myPOV.TiltAxis.Value = dstEuler.y;
+        myPanTilt.PanAxis.Value = dstEuler.x;
+        myPanTilt.TiltAxis.Value = dstEuler.y;
+        //myPanTilt.m_Pitch.Value = dstEuler.x;
+        //myPanTilt.m_Yaw.Value = dstEuler.y;
 
         //mainCameraTransform.rotation *= Quaternion.Inverse(twinCamera.transform.rotation) * twinRef.rotation;
         //elementToSwitch.localRotation *= Quaternion.Inverse(mainRef.rotation) * twinRef.rotation;
