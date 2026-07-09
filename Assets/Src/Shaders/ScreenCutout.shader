@@ -30,9 +30,6 @@ Shader "_ViriantoTem/HLSL/ScreenCutout"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
 			// UNIFORMS: External parameters
-			// This macro declares _MainTex as a Texture2D object
-			//Texture2D<min16float2> _MainTex;
-			//sampler2D _MainTex_ST;
 			sampler2D _MainTex;
 			
 			// Data structure: Before vertex shader (mesh info)
