@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class B_MazePortals : MonoBehaviour
+public class M_MazePortals : MonoBehaviour
 {
     #region ATTRIBUTES
         
@@ -12,26 +12,31 @@ public class B_MazePortals : MonoBehaviour
         /// <summary>
         /// Space where the PORTAL is placed (not destiny point)
         /// </summary>
+        [Tooltip("Space where the PORTAL is placed (not destiny point)")]
         public InEuclideanSpaces originSpace;
 
         /// <summary>
         /// Space where player will be teleported after touching the portal
         /// </summary>
+        [Tooltip("Space where player will be teleported after touching the portal")]
         public InEuclideanSpaces destinySpace;
         
         /// <summary>
         /// Quad with collider in scene. Twin camera will render on it
         /// </summary>
+        [Tooltip("Quad with collider in scene. Twin camera will render on it")]
         public Transform portalFrame;
 
         /// <summary>
         /// Twin camera will take this point as reference to render
         /// </summary>
+        [Tooltip("Twin camera will take this point as reference to render")]
         public Transform destinyPoint;
 
         /// <summary>
         /// When player is closer to this point, the portal will stay active
         /// </summary>
+        [Tooltip("When player is closer to this point, the portal will stay active")]
         public Transform activationPoint;
     }
         
