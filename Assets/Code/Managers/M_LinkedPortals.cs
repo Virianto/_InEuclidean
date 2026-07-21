@@ -53,7 +53,7 @@ public class M_LinkedPortals : MonoBehaviour
 
     [SerializeField] GameObject twinCamera;
 
-    [SerializeField] CinemachineCamera cinemachineCamera;
+    [SerializeField] Camera mainCamera;
 
     [Header("PORTALS AND REFERENCES")]
 
@@ -65,12 +65,12 @@ public class M_LinkedPortals : MonoBehaviour
 
     List<Transform> activationPointsInCurrentSpace = new List<Transform>();
 
-    Transform mainCameraTransform;
+    Transform _mainCameraTransform;
 
-    Transform mainRef;
-    Transform twinRef;
+    Transform _mainRef;
+    Transform _twinRef;
 
-    Vector3 relativeMainCamPosition;
+    Vector3 _relativeMainCamPosition;
 
     InEuclideanSpaces _currentSpace;
 
@@ -137,8 +137,8 @@ public class M_LinkedPortals : MonoBehaviour
             };
         }
 
-        mainCameraTransform = Camera.main.transform;
-        myPanTilt = cinemachineCamera.GetComponent<CinemachinePanTilt>();
+        _mainCameraTransform = Camera.main.transform;
+        myPanTilt = mainCamera.GetComponent<CinemachinePanTilt>();
         //myPOV = cinemachineCamera.GetCinemachineComponent<CinemachinePOV>();       
     }
 
@@ -155,17 +155,17 @@ public class M_LinkedPortals : MonoBehaviour
 
         // Set references to start working
 
-        mainRef = currentActivePortal.portalFrame;
-        twinRef = currentActivePortal.destinyPoint;
+        _mainRef = currentActivePortal.portalFrame;
+        _twinRef = currentActivePortal.destinyPoint;
 
         // MOVE TWIN CAMERA CONSIDERING REFERENCES
 
-        relativeMainCamPosition = mainRef.InverseTransformPoint(mainCameraTransform.position);
-        twinCamera.transform.localPosition = twinRef.TransformPoint(relativeMainCamPosition);
+        _relativeMainCamPosition = _mainRef.InverseTransformPoint(_mainCameraTransform.position);
+        twinCamera.transform.localPosition = _twinRef.TransformPoint(_relativeMainCamPosition);
 
         // ROTATE TWIN CAMERA CONSIDERING REFERENCES
 
-        twinCamera.transform.localRotation = Quaternion.Inverse(mainRef.localRotation) * mainCameraTransform.localRotation;
+        twinCamera.transform.localRotation = Quaternion.Inverse(_mainRef.localRotation) * _mainCameraTransform.localRotation;
         //twinCamera.transform.rotation = mainCameraTransform.rotation;
     }
 
@@ -181,7 +181,7 @@ public class M_LinkedPortals : MonoBehaviour
 
         for (int a = 0; a < activationPoints.Length; ++a)
         {
-            float d = Vector3.Distance(mainCameraTransform.position, activationPoints[a].position);
+            float d = Vector3.Distance(_mainCameraTransform.position, activationPoints[a].position);
             if (d < mDistance)
             {
                 mDistance = d;
@@ -203,13 +203,13 @@ public class M_LinkedPortals : MonoBehaviour
 
         Vector3 twinCamPos = twinCamera.transform.position;
 
-        Vector3 r = mainCameraTransform.InverseTransformPoint(elementToSwitch.position);
+        Vector3 r = _mainCameraTransform.InverseTransformPoint(elementToSwitch.position);
 
         elementToSwitch.position = twinCamPos + r;
 
         Vector3 twinEulerRotation = twinCamera.transform.rotation.eulerAngles;
 
-        Quaternion dstRotation = twinRef.rotation * Quaternion.Inverse(mainCameraTransform.rotation) * mainRef.rotation;
+        Quaternion dstRotation = _twinRef.rotation * Quaternion.Inverse(_mainCameraTransform.rotation) * _mainRef.rotation;
         Vector3 dstEuler = Quaternion.ToEulerAngles(dstRotation);
 
         myPanTilt.PanAxis.Value = dstEuler.x;
