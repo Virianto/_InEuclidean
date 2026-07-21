@@ -103,9 +103,13 @@ public class M_SimplePortal : MonoBehaviour
         _mainRefToMainCameraPosition = _mainRef.InverseTransformPoint(_mainCameraTransform.position);
         twinCamera.transform.localPosition = _twinRef.TransformPoint(_mainRefToMainCameraPosition);
         
-        _mainRefToMainCameraRotation = Quaternion.FromToRotation(_mainCameraTransform.forward, _mainRef.forward);
+        Quaternion translationRotation = Quaternion.FromToRotation(_mainRef.forward, _twinRef.forward);
+        
+        _mainRefToMainCameraRotation = Quaternion.FromToRotation(_mainRef.forward, _mainCameraTransform.forward);
+        
+        twinCamera.transform.localRotation = _mainRefToMainCameraRotation * translationRotation;
+        
 
-        twinCamera.transform.rotation = Quaternion.Inverse(_mainRefToMainCameraRotation);
     }
 
     public void SwitchElements(Transform elementToSwitch)
