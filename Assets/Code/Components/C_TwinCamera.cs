@@ -4,9 +4,10 @@ public class C_TwinCamera : MonoBehaviour
 {
     #region ATTRIBUTES
 
-    public Material targetMat;
+    [SerializeField]
+    Material targetMat;
 
-    Camera selfCam;
+    Camera _selfCam;
 
     #endregion
 
@@ -14,14 +15,14 @@ public class C_TwinCamera : MonoBehaviour
 
     void Awake()
     {
-        selfCam = GetComponent<Camera>();
+        _selfCam = GetComponent<Camera>();
     }
 
     void Start()
     {
-        selfCam.targetTexture?.Release();
-        selfCam.targetTexture = new RenderTexture(Screen.width, Screen.height, 24);
-        targetMat.mainTexture = selfCam.targetTexture;
+        _selfCam.targetTexture?.Release();
+        _selfCam.targetTexture = new RenderTexture(Screen.width, Screen.height, 24);
+        targetMat.mainTexture = _selfCam.targetTexture;
     }
 
     #endregion
