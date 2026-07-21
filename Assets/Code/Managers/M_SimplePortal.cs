@@ -16,7 +16,7 @@ public class M_SimplePortal : MonoBehaviour
         public C_NormalizedTrigger omegaTrigger;
     }
 
-    Transform mainCameraTransform;
+    Transform _mainCameraTransform;
 
     [Header("ACTORS")]
 
@@ -29,14 +29,15 @@ public class M_SimplePortal : MonoBehaviour
     [SerializeField] Transform alphaExit;
     [SerializeField] Transform omegaExit;
 
-    Transform mainRef;
-    Transform twinRef;
+    Transform _mainRef;
+    Transform _twinRef;
 
-    Vector3 mainRefToMainCamera;
+    Vector3 _mainRefToMainCameraPosition;
+    Quaternion _mainRefToMainCameraRotation;   
 
-    PlayerInSpace currentSpace = PlayerInSpace.Alpha;
+    PlayerInSpace _currentSpace = PlayerInSpace.Alpha;
 
-    bool playerIsCrossing = false;    
+    bool _playerIsCrossing = false;    
 
     #endregion
 
@@ -44,9 +45,9 @@ public class M_SimplePortal : MonoBehaviour
 
     void Awake()
     {
-        mainCameraTransform = Camera.main.transform;
-        mainRef = alphaEntry;
-        twinRef = omegaEntry;
+        _mainCameraTransform = Camera.main.transform;
+        _mainRef = alphaEntry;
+        _twinRef = omegaEntry;
     }
 
     void Start()
@@ -62,19 +63,19 @@ public class M_SimplePortal : MonoBehaviour
         {
             allTriggers[a].OnFrontalTriggerEnter += (Transform t) => 
             {                
-                playerIsCrossing = !playerIsCrossing;
+                _playerIsCrossing = !_playerIsCrossing;
             };
 
             allTriggers[a].OnRearTriggerEnter += (Transform t) =>
             {                                                
-                if (!playerIsCrossing)
+                if (!_playerIsCrossing)
                 {
-                    playerIsCrossing = true;
+                    _playerIsCrossing = true;
                     SwitchElements(t);
                 }
                 else
                 {
-                    playerIsCrossing = false;
+                    _playerIsCrossing = false;
                 }
             };
         }
@@ -82,39 +83,41 @@ public class M_SimplePortal : MonoBehaviour
 
     void LateUpdate()
     {
-        if(currentSpace == PlayerInSpace.Alpha)
+        if(_currentSpace == PlayerInSpace.Alpha)
         {
-            float distanceToAlphaEntry = Vector3.Distance(mainCameraTransform.position, alphaEntry.position);
-            float distanceToAlphaExit = Vector3.Distance(mainCameraTransform.position, alphaExit.position);
+            float distanceToAlphaEntry = Vector3.Distance(_mainCameraTransform.position, alphaEntry.position);
+            float distanceToAlphaExit = Vector3.Distance(_mainCameraTransform.position, alphaExit.position);
             
-            mainRef = distanceToAlphaEntry < distanceToAlphaExit ? alphaExit : alphaEntry;
-            twinRef = distanceToAlphaEntry < distanceToAlphaExit ? omegaExit : omegaEntry;
+            _mainRef = distanceToAlphaEntry < distanceToAlphaExit ? alphaExit : alphaEntry;
+            _twinRef = distanceToAlphaEntry < distanceToAlphaExit ? omegaExit : omegaEntry;
         }
         else
         {
-            float distanceToOmegaEntry = Vector3.Distance(mainCameraTransform.position, omegaEntry.position);
-            float distanceToOmegaExit = Vector3.Distance(mainCameraTransform.position, omegaExit.position);
+            float distanceToOmegaEntry = Vector3.Distance(_mainCameraTransform.position, omegaEntry.position);
+            float distanceToOmegaExit = Vector3.Distance(_mainCameraTransform.position, omegaExit.position);
 
-            mainRef = distanceToOmegaEntry < distanceToOmegaExit ? omegaEntry : omegaExit;
-            twinRef = distanceToOmegaEntry < distanceToOmegaExit ? alphaEntry : alphaExit;
+            _mainRef = distanceToOmegaEntry < distanceToOmegaExit ? omegaEntry : omegaExit;
+            _twinRef = distanceToOmegaEntry < distanceToOmegaExit ? alphaEntry : alphaExit;
         }
 
-        mainRefToMainCamera = mainRef.InverseTransformPoint(mainCameraTransform.position);
-        twinCamera.transform.localPosition = twinRef.TransformPoint(mainRefToMainCamera);
+        _mainRefToMainCameraPosition = _mainRef.InverseTransformPoint(_mainCameraTransform.position);
+        twinCamera.transform.localPosition = _twinRef.TransformPoint(_mainRefToMainCameraPosition);
+        
+        _mainRefToMainCameraRotation = Quaternion.FromToRotation(_mainCameraTransform.forward, _mainRef.forward);
 
-        twinCamera.transform.rotation = twinRef.rotation;
+        twinCamera.transform.rotation = Quaternion.Inverse(_mainRefToMainCameraRotation);
     }
 
     public void SwitchElements(Transform elementToSwitch)
     {
-        if (playerIsCrossing)
+        if (_playerIsCrossing)
         {
-            currentSpace = currentSpace == PlayerInSpace.Alpha ? PlayerInSpace.Omega : PlayerInSpace.Alpha;            
+            _currentSpace = _currentSpace == PlayerInSpace.Alpha ? PlayerInSpace.Omega : PlayerInSpace.Alpha;            
 
             Vector3 twinCamPos = twinCamera.transform.position;
 
             elementToSwitch.position = twinCamPos;
-            elementToSwitch.rotation *= Quaternion.Inverse(mainRef.rotation) * twinRef.rotation;
+            elementToSwitch.rotation *= Quaternion.Inverse(_mainRef.rotation) * _twinRef.rotation;
         }        
     }
 
