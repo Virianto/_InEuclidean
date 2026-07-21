@@ -114,6 +114,8 @@ public class M_SimplePortal : MonoBehaviour
 
     public void SwitchElements(Transform elementToSwitch)
     {
+        Debug.Log("Switching elements");       
+        
         if (_playerIsCrossing)
         {
             _currentSpace = _currentSpace == PlayerInSpace.Alpha ? PlayerInSpace.Omega : PlayerInSpace.Alpha;            
