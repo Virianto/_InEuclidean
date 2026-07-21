@@ -1032,7 +1032,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::M_LinkedPortals
   twinCamera: {fileID: 1849109241}
-  cinemachineCamera: {fileID: 968609043}
+  mainCamera: {fileID: 1466882536}
   allPortals:
   - originSpace: 1
     destinySpace: 2

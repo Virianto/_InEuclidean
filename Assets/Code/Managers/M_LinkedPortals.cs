@@ -26,26 +26,31 @@ public class M_LinkedPortals : MonoBehaviour
         /// <summary>
         /// Space where the PORTAL is placed (not destiny point)
         /// </summary>
+        [Tooltip("Space where the PORTAL is placed (not destiny point)")]
         public InEuclideanSpaces originSpace;
 
         /// <summary>
         /// Space where player will be teleported after touching the portal
         /// </summary>
+        [Tooltip("Space where player will be teleported after touching the portal")]
         public InEuclideanSpaces destinySpace;
 
         /// <summary>
         /// Quad with collider in scene. Twin camera will render on it
         /// </summary>
+        [Tooltip("Quad with collider in scene. Twin camera will render on it")]
         public Transform portalFrame;
 
         /// <summary>
         /// Twin camera will take this point as reference to render
         /// </summary>
+        [Tooltip("Twin camera will take this point as reference to render")]
         public Transform destinyPoint;
 
         /// <summary>
         /// When player is closer to this point, the portal will stay active
         /// </summary>
+        [Tooltip("When player is closer to this point, the portal will stay active")]
         public Transform activationPoint;
     }
 
@@ -212,13 +217,13 @@ public class M_LinkedPortals : MonoBehaviour
         Quaternion dstRotation = _twinRef.rotation * Quaternion.Inverse(_mainCameraTransform.rotation) * _mainRef.rotation;
         Vector3 dstEuler = Quaternion.ToEulerAngles(dstRotation);
 
-        myPanTilt.PanAxis.Value = dstEuler.x;
-        myPanTilt.TiltAxis.Value = dstEuler.y;
+        //myPanTilt.PanAxis.Value = dstEuler.x;
+        //myPanTilt.TiltAxis.Value = dstEuler.y;
         //myPanTilt.m_Pitch.Value = dstEuler.x;
         //myPanTilt.m_Yaw.Value = dstEuler.y;
 
-        //mainCameraTransform.rotation *= Quaternion.Inverse(twinCamera.transform.rotation) * twinRef.rotation;
-        //elementToSwitch.localRotation *= Quaternion.Inverse(mainRef.rotation) * twinRef.rotation;
+        _mainCameraTransform.rotation *= Quaternion.Inverse(twinCamera.transform.rotation) * _twinRef.rotation;
+        elementToSwitch.localRotation *= Quaternion.Inverse(_mainRef.rotation) * _twinRef.rotation;
     }
 
     #endregion
