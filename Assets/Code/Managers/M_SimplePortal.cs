@@ -32,8 +32,8 @@ public class M_SimplePortal : MonoBehaviour
     Transform _mainRef;
     Transform _twinRef;
 
-    Vector3 _mainRefToMainCameraPosition;
-    Quaternion _mainRefToMainCameraRotation;   
+    Vector3 _mainRefToMainCamPos;
+    Quaternion _mainRefToMainCamRot;   
 
     PlayerInSpace _currentSpace = PlayerInSpace.Alpha;
 
@@ -100,14 +100,14 @@ public class M_SimplePortal : MonoBehaviour
             _twinRef = distanceToOmegaEntry < distanceToOmegaExit ? alphaEntry : alphaExit;
         }
 
-        _mainRefToMainCameraPosition = _mainRef.InverseTransformPoint(_mainCameraTransform.position);
-        twinCamera.transform.localPosition = _twinRef.TransformPoint(_mainRefToMainCameraPosition);
+        _mainRefToMainCamPos = _mainRef.InverseTransformPoint(_mainCameraTransform.position);
+        twinCamera.transform.localPosition = _twinRef.TransformPoint(_mainRefToMainCamPos);
         
         Quaternion translationRotation = Quaternion.FromToRotation(_mainRef.forward, _twinRef.forward);
         
-        _mainRefToMainCameraRotation = Quaternion.FromToRotation(_mainRef.forward, _mainCameraTransform.forward);
+        _mainRefToMainCamRot = Quaternion.FromToRotation(_mainRef.forward, _mainCameraTransform.forward);
         
-        twinCamera.transform.localRotation = _mainRefToMainCameraRotation * translationRotation;
+        twinCamera.transform.localRotation = _mainRefToMainCamRot * translationRotation;
         
 
     }

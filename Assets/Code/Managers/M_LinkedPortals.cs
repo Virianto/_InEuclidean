@@ -62,13 +62,13 @@ public class M_LinkedPortals : MonoBehaviour
 
     [Header("PORTALS AND REFERENCES")]
 
-    [SerializeField] List<SinglePortalPoints> allPortals = new List<SinglePortalPoints>();
+    [SerializeField] List<SinglePortalPoints> allPortals = new();
 
-    Dictionary<Transform, SinglePortalPoints> activationPoints_Portals = new Dictionary<Transform, SinglePortalPoints>();
+    Dictionary<Transform, SinglePortalPoints> activationPoints_Portals = new();
 
-    SinglePortalPoints currentActivePortal;
+    SinglePortalPoints _currentActivePortal;
 
-    List<Transform> activationPointsInCurrentSpace = new List<Transform>();
+    List<Transform> _activationPointsInCurrentSpace = new();
 
     Transform _mainCameraTransform;
 
@@ -94,15 +94,13 @@ public class M_LinkedPortals : MonoBehaviour
             {
                 if (allPortals[a].originSpace == _currentSpace)
                 {
-                    activationPointsInCurrentSpace.Add(allPortals[a].activationPoint);
+                    _activationPointsInCurrentSpace.Add(allPortals[a].activationPoint);
                 }
             }
         }
     }
 
-    CinemachinePanTilt myPanTilt;
-
-    bool playerIsCrossing = false;
+    bool _playerIsCrossing = false;
 
     #endregion
 
@@ -125,26 +123,24 @@ public class M_LinkedPortals : MonoBehaviour
 
             nTrigger.OnFrontalTriggerEnter += (Transform t) =>
             {
-                playerIsCrossing = !playerIsCrossing;
+                _playerIsCrossing = !_playerIsCrossing;
             };
 
             nTrigger.OnRearTriggerEnter += (Transform transformDetected) =>
             {
-                if (!playerIsCrossing)
+                if (!_playerIsCrossing)
                 {
-                    playerIsCrossing = true;
+                    _playerIsCrossing = true;
                     SwitchElements(x, transformDetected);
                 }
                 else
                 {
-                    playerIsCrossing = false;
+                    _playerIsCrossing = false;
                 }
             };
         }
 
-        _mainCameraTransform = Camera.main.transform;
-        myPanTilt = mainCamera.GetComponent<CinemachinePanTilt>();
-        //myPOV = cinemachineCamera.GetCinemachineComponent<CinemachinePOV>();       
+        _mainCameraTransform = Camera.main.transform;    
     }
 
     void Start()
@@ -156,12 +152,12 @@ public class M_LinkedPortals : MonoBehaviour
     {
         // Get closest portal inside current Non Euclidean Space
 
-        activationPoints_Portals.TryGetValue(GetClosestActivationPoint(activationPointsInCurrentSpace.ToArray()), out currentActivePortal);
+        activationPoints_Portals.TryGetValue(GetClosestActivationPoint(_activationPointsInCurrentSpace.ToArray()), out _currentActivePortal);
 
         // Set references to start working
 
-        _mainRef = currentActivePortal.portalFrame;
-        _twinRef = currentActivePortal.destinyPoint;
+        _mainRef = _currentActivePortal.portalFrame;
+        _twinRef = _currentActivePortal.destinyPoint;
 
         // MOVE TWIN CAMERA CONSIDERING REFERENCES
 
@@ -212,15 +208,7 @@ public class M_LinkedPortals : MonoBehaviour
 
         elementToSwitch.position = twinCamPos + r;
 
-        Vector3 twinEulerRotation = twinCamera.transform.rotation.eulerAngles;
-
         Quaternion dstRotation = _twinRef.rotation * Quaternion.Inverse(_mainCameraTransform.rotation) * _mainRef.rotation;
-        Vector3 dstEuler = Quaternion.ToEulerAngles(dstRotation);
-
-        //myPanTilt.PanAxis.Value = dstEuler.x;
-        //myPanTilt.TiltAxis.Value = dstEuler.y;
-        //myPanTilt.m_Pitch.Value = dstEuler.x;
-        //myPanTilt.m_Yaw.Value = dstEuler.y;
 
         _mainCameraTransform.rotation *= Quaternion.Inverse(twinCamera.transform.rotation) * _twinRef.rotation;
         elementToSwitch.localRotation *= Quaternion.Inverse(_mainRef.rotation) * _twinRef.rotation;
