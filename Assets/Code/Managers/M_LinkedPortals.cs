@@ -75,7 +75,8 @@ public class M_LinkedPortals : MonoBehaviour
     Transform _mainRef;
     Transform _twinRef;
 
-    Vector3 _relativeMainCamPosition;
+    Vector3 _relativeMainCamPos;
+    Quaternion _mainRefToMainCamRot;
 
     InEuclideanSpaces _currentSpace;
 
@@ -121,12 +122,12 @@ public class M_LinkedPortals : MonoBehaviour
 
             C_NormalizedTrigger nTrigger = allPortals[a].portalFrame.GetComponentInChildren<C_NormalizedTrigger>();
 
-            nTrigger.OnFrontalTriggerEnter += (Transform t) =>
+            nTrigger.OnFrontalTriggerEnter += (t) =>
             {
                 _playerIsCrossing = !_playerIsCrossing;
             };
 
-            nTrigger.OnRearTriggerEnter += (Transform transformDetected) =>
+            nTrigger.OnRearTriggerEnter += (transformDetected) =>
             {
                 if (!_playerIsCrossing)
                 {
@@ -145,7 +146,7 @@ public class M_LinkedPortals : MonoBehaviour
 
     void Start()
     {
-        CurrentSpace = InEuclideanSpaces.First;
+        CurrentSpace = InEuclideanSpaces.Zero;
     }
 
     void LateUpdate()
@@ -161,13 +162,16 @@ public class M_LinkedPortals : MonoBehaviour
 
         // MOVE TWIN CAMERA CONSIDERING REFERENCES
 
-        _relativeMainCamPosition = _mainRef.InverseTransformPoint(_mainCameraTransform.position);
-        twinCamera.transform.localPosition = _twinRef.TransformPoint(_relativeMainCamPosition);
+        _relativeMainCamPos = _mainRef.InverseTransformPoint(_mainCameraTransform.position);
+        twinCamera.transform.localPosition = _twinRef.TransformPoint(_relativeMainCamPos);
 
         // ROTATE TWIN CAMERA CONSIDERING REFERENCES
-
-        twinCamera.transform.localRotation = Quaternion.Inverse(_mainRef.localRotation) * _mainCameraTransform.localRotation;
-        //twinCamera.transform.rotation = mainCameraTransform.rotation;
+        
+        Quaternion translationRotation = Quaternion.FromToRotation(_mainRef.forward, _twinRef.forward);
+        
+        _mainRefToMainCamRot = Quaternion.FromToRotation(_mainRef.forward, _mainCameraTransform.forward);
+        
+        twinCamera.transform.localRotation = _mainRefToMainCamRot * translationRotation;
     }
 
     /// <summary>
