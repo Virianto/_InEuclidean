@@ -483,7 +483,7 @@ Transform:
   m_GameObject: {fileID: 127162060}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0.29999927}
+  m_LocalPosition: {x: 0, y: 2, z: 0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1405,13 +1405,13 @@ MonoBehaviour:
   twinCamera: {fileID: 1488208800}
   mainCamera: {fileID: 961739752}
   allPortals:
-  - originSpace: 1
-    destinySpace: 0
+  - originSpace: 0
+    destinySpace: 1
     portalFrame: {fileID: 1092537040}
     destinyPoint: {fileID: 127162061}
     activationPoint: {fileID: 1092537040}
-  - originSpace: 0
-    destinySpace: 1
+  - originSpace: 1
+    destinySpace: 0
     portalFrame: {fileID: 1260007284}
     destinyPoint: {fileID: 624105878}
     activationPoint: {fileID: 1260007284}
@@ -2509,13 +2509,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 961739749}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 24.1, y: 1, z: -0.3}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 196274109}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &961739754
 MonoBehaviour:
   m_ObjectHideFlags: 0
