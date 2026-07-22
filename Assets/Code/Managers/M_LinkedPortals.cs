@@ -166,11 +166,9 @@ public class M_LinkedPortals : MonoBehaviour
 
         // ROTATE TWIN CAMERA CONSIDERING REFERENCES
         
-        Quaternion translationRotation = Quaternion.FromToRotation(_mainRef.forward, _twinRef.forward);
-        
         _mainRefToMainCamRot = Quaternion.FromToRotation(_mainRef.forward, _mainCameraTransform.forward);
-
-        twinCamera.transform.localRotation = _mainRefToMainCamRot * _twinRef.localRotation;
+        
+        twinCamera.transform.rotation = _mainRefToMainCamRot * _twinRef.rotation;
     }
 
     /// <summary>
