@@ -206,16 +206,13 @@ public class M_LinkedPortals : MonoBehaviour
     {
         CurrentSpace = portalTouched.destinySpace;
 
-        Vector3 twinCamPos = twinCamera.transform.position;
+        // MOVE MAIN VIEW POSITION TO TWIN CAMERA
+        
+        elementToSwitch.position = twinCamera.transform.position;
 
-        Vector3 r = _mainCameraTransform.InverseTransformPoint(elementToSwitch.position);
-
-        elementToSwitch.position = twinCamPos + r;
-
-        Quaternion dstRotation = _twinRef.rotation * Quaternion.Inverse(_mainCameraTransform.rotation) * _mainRef.rotation;
-
-        _mainCameraTransform.rotation *= Quaternion.Inverse(twinCamera.transform.rotation) * _twinRef.rotation;
-        elementToSwitch.localRotation *= Quaternion.Inverse(_mainRef.rotation) * _twinRef.rotation;
+        // CHANGE MAIN VIEW ROTATION TO MIMIC TWIN CAMERA
+        
+        _mainCameraTransform.rotation = twinCamera.transform.localRotation;
     }
 
     #endregion
