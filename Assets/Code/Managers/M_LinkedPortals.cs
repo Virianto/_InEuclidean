@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Unity.Cinemachine;
 using UnityEngine;
 
 public enum InEuclideanSpaces : byte
@@ -170,8 +169,8 @@ public class M_LinkedPortals : MonoBehaviour
         Quaternion translationRotation = Quaternion.FromToRotation(_mainRef.forward, _twinRef.forward);
         
         _mainRefToMainCamRot = Quaternion.FromToRotation(_mainRef.forward, _mainCameraTransform.forward);
-        
-        twinCamera.transform.localRotation = _mainRefToMainCamRot * translationRotation;
+
+        twinCamera.transform.localRotation = _mainRefToMainCamRot * _twinRef.localRotation;
     }
 
     /// <summary>
