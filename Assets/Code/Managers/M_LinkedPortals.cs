@@ -75,7 +75,7 @@ public class M_LinkedPortals : MonoBehaviour
     Transform _twinRef;
 
     Vector3 _relativeMainCamPos;
-    Quaternion _mainRefToMainCamRot;
+    Quaternion _relativeMainCamRot;
 
     InEuclideanSpaces _currentSpace;
 
@@ -166,9 +166,9 @@ public class M_LinkedPortals : MonoBehaviour
 
         // ROTATE TWIN CAMERA CONSIDERING REFERENCES
         
-        _mainRefToMainCamRot = Quaternion.FromToRotation(_mainRef.forward, _mainCameraTransform.forward);
+        _relativeMainCamRot = Quaternion.FromToRotation(_mainRef.forward, _mainCameraTransform.forward);
         
-        twinCamera.transform.rotation = _mainRefToMainCamRot * _twinRef.rotation;
+        twinCamera.transform.rotation = _relativeMainCamRot * _twinRef.rotation;
     }
 
     /// <summary>

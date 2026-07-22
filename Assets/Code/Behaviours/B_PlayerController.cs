@@ -39,6 +39,9 @@ public class B_PlayerController : MonoBehaviour
     void Update()
     {
         transform.Translate(_moveDirection * Time.deltaTime * _speed);
+        
+        Vector2 rotation = _testingMapActions.Look.ReadValue<Vector2>();
+        transform.Rotate(0, rotation.x, 0);       
     }
     
     /// <summary>
